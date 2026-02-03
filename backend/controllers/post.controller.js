@@ -24,8 +24,22 @@ export async function createPost(req, res){
 
 export async function getPosts(req, res){
   try {
-    const posts = await Post.find().sort({ createdAt: -1 });
-    res.json(posts);
+    const page = Number(req.query.page) || 1;
+    const limit = 10;
+    const skip = (page - 1) * limit;
+
+    const posts = await Post.find()
+      .sort({ createdAt: -1 })
+      .skip(skip)
+      .limit(limit);
+
+    const totalPosts = await Post.countDocuments();
+
+    res.json({
+      posts,
+      currentPage: page,
+      totalPages: Math.ceil(totalPosts / limit)
+    });
   } catch (error) {
     res.status(500).json({ message: "Server error" });
   }
