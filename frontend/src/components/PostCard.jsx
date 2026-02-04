@@ -13,8 +13,8 @@ import {
 import FavoriteIcon from "@mui/icons-material/Favorite";
 import CommentIcon from "@mui/icons-material/Comment";
 import { useContext, useState } from "react";
-import { apiRequest } from "../api/api";
-import { AuthContext } from "../context/AuthContext";
+import { apiRequest } from "../api/api.js";
+import { AuthContext } from "../contexts/AuthContext.jsx";
 
 export default function PostCard({ post, onUpdate }) {
   const { user } = useContext(AuthContext);

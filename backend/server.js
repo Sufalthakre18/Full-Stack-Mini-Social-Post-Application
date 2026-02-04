@@ -1,27 +1,24 @@
 import "dotenv/config";
-import dotenv from 'dotenv'
-import express from 'express'
-import cors from 'cors'
+import express from "express";
+import cors from "cors";
 import dbConnect from "./config/db.js";
-import authRoutes from "./routes/auth.routes.js"
-import postRoutes from "./routes/post.routes.js"
-dotenv.config()
+import authRoutes from "./routes/auth.routes.js";
+import postRoutes from "./routes/post.routes.js";
 
-const app= express();
-dbConnect()
+const app = express();
+dbConnect();
 
-app.use(cors())
-app.use(express.json())
+app.use(cors({ origin: "*" }));
+app.use(express.json());
 
-app.get('/',(_ ,res)=>{
-    res.send("api is running")
-})
-app.use('/api/auth',authRoutes)
-app.use('/api/posts',postRoutes)
+app.get("/", (_, res) => {
+  res.send("api is running");
+});
 
+app.use("/api/auth", authRoutes);
+app.use("/api/posts", postRoutes);
 
-
-const PORT = process.env.PORT || 5000
-app.listen(PORT,()=>{
-    console.log(`Server running on port ${PORT} `);
-})
+const PORT = process.env.PORT || 5000;
+app.listen(PORT, () => {
+  console.log(`Server running on port ${PORT}`);
+});

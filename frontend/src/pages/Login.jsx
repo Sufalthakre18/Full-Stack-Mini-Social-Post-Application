@@ -1,7 +1,7 @@
 import { TextField, Button, Paper } from "@mui/material";
 import { useState, useContext } from "react";
-import { apiRequest } from "../api/api";
-import { AuthContext } from "../context/AuthContext";
+import { apiRequest } from "../api/api.js";
+import { AuthContext } from "../contexts/AuthContext.jsx";
 import { useNavigate } from "react-router-dom";
 
 export default function Login() {
