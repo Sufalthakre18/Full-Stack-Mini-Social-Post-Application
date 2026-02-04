@@ -2,12 +2,20 @@ import User from "../models/User.js";
 import bcrypt from 'bcryptjs'
 import jwt from "jsonwebtoken"
 
+const generateToken = (id, username) => {
+  return jwt.sign(
+    { id, username },
+    process.env.JWT_SECRET,
+    { expiresIn: "1d" }
+  );
+};
 
-export async function signup(req, res){
+
+export async function signup(req, res) {
   try {
     const { username, email, password } = req.body;
 
-    
+
     if (!username || !email || !password) {
       return res.status(400).json({
         error: "All fields are required",
@@ -27,23 +35,28 @@ export async function signup(req, res){
       });
     }
 
-    // 3. Create user
+    const salt = await bcrypt.genSalt(10);
+    const hashedPassword = await bcrypt.hash(password, salt);
+
+
     const user = await User.create({
       username,
       email,
-      password,
+      password: hashedPassword,
     });
 
+
     res.status(201).json({
+      message: "Account created successfully",
       _id: user._id,
       username: user.username,
       email: user.email,
-      token: generateToken(user._id),
+      token: generateToken(user._id, user.username),
     });
+
   } catch (error) {
     console.error("Signup error:", error);
 
-    // Mongo duplicate key safety
     if (error.code === 11000) {
       return res.status(400).json({
         error: "Email already exists",
@@ -56,7 +69,7 @@ export async function signup(req, res){
   }
 };
 
-export async function login(req, res){
+export async function login(req, res) {
   const { email, password } = req.body;
 
   try {
