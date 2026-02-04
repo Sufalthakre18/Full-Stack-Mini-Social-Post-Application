@@ -1,145 +1,197 @@
-# 🚀 Mini Social Post Application
+# 🚀 Mini Social Post Application (3W Full Stack Internship Task)
 
-A full-stack **Mini Social Media Application** where users can sign up, log in, create posts, and interact with content in a clean, modern UI.
-
-🔗 **Live Demo**
-
-* **Frontend:** [https://mini-social-post-application.vercel.app](https://mini-social-post-application.vercel.app)
-* **Backend API:** [https://mini-social-post-application-x0vv.onrender.com](https://mini-social-post-application-x0vv.onrender.com)
+A full-stack **Mini Social Media Application** built as part of the **3W Business Private Limited – Full Stack Internship** assignment.
+This project allows users to create accounts, post content, like and comment on posts, and view a public feed — inspired by the **TaskPlanet Social Page**.
 
 ---
 
-## 📸 Screenshots
+## 🌐 Live Demo
 
-```md
-![Signup Page](./screenshots/signup.png)
-![Login Page](./screenshots/login.png)
-![Create Post](./screenshots/create-post.png)
-![Post Feed](./screenshots/feed.png)
-```
+🔗 **Frontend (Vercel)**
+[https://mini-social-post-application.vercel.app](https://mini-social-post-application.vercel.app)
 
-📁 Suggested folder structure:
-
-```
-screenshots/
- ├── signup.png
- ├── login.png
- ├── create-post.png
- └── feed.png
-```
+🔗 **Backend API (Render)**
+[https://mini-social-post-application-x0vv.onrender.com](https://mini-social-post-application-x0vv.onrender.com)
 
 ---
 
-## ✨ Features
+## 📌 Features Implemented
 
 ### 🔐 Authentication
 
-* User Signup & Login
+* User **Signup & Login** with email and password
+* Password hashing using **bcrypt**
 * JWT-based authentication
-* Secure password hashing
+* Protected routes for creating posts, liking & commenting
 
 ### 📝 Posts
 
-* Create posts
-* Fetch all posts
-* User-specific post handling
+* Create a post with:
 
-### 🌐 Full Stack
+  * Text only
+  * Image only
+  * Text + Image
+* Public feed showing all posts
+* Posts displayed in **original image size on desktop screens**
 
-* Modern React frontend
-* RESTful API with Express
-* MongoDB database integration
+### ❤️ Like & 💬 Comment
 
-### 🚀 Deployment
+* Like any post
+* Comment on any post
+* Real-time UI updates (no page reload)
+* Stores usernames of users who liked/commented
 
-* Frontend deployed on **Vercel**
-* Backend deployed on **Render**
-* CORS properly configured for production
+### 📰 Feed
+
+* Displays:
+
+  * Username
+  * Post content (text/image)
+  * Total likes
+  * Total comments
+* Clean, modern, responsive UI inspired by TaskPlanet
 
 ---
 
-## 🛠️ Tech Stack
+## 🛠 Tech Stack
 
 ### Frontend
 
-* React
-* Vite
-* Fetch API
-* CSS 
+* **React.js (Vite)**
+* **Material UI (MUI)**
+* Fetch API 
+* React Context API for authentication
+* Fully responsive design
 
 ### Backend
 
-* Node.js
-* Express.js
-* MongoDB
-* Mongoose
+* **Node.js**
+* **Express.js**
+* **MongoDB + Mongoose**
 * JWT Authentication
-* bcrypt
-* dotenv
-* CORS
+* Secure CORS handling (supports Vercel preview & production domains)
+
+### Database
+
+* **MongoDB Atlas**
+* Only **two collections** used:
+
+  * `users`
+  * `posts`
 
 ### Deployment
 
-* **Vercel** (Frontend)
-* **Render** (Backend)
+| Layer    | Platform      |
+| -------- | ------------- |
+| Frontend | Vercel        |
+| Backend  | Render        |
+| Database | MongoDB Atlas |
 
 ---
 
-## 🌍 Architecture Overview
+## 🧱 Project Structure
+
+### Backend
 
 ```
-Frontend (Vercel)
-        |
-        | HTTPS Requests
-        ↓
-Backend API (Render)
-        |
-        ↓
-MongoDB Database
+backend/
+│── config/
+│   └── db.js
+│── controllers/
+│   ├── auth.controller.js
+│   └── post.controller.js
+│── models/
+│   ├── User.js
+│   └── Post.js
+│── routes/
+│   ├── auth.routes.js
+│   └── post.routes.js
+│── middleware/
+│   └── auth.middleware.js
+│── server.js
+│── .env
+```
+
+### Frontend
+
+```
+frontend/
+│── src/
+│   ├── api/
+│   │   └── api.js
+│   ├── components/
+│   │   ├── Navbar.jsx
+│   │   ├── PostCard.jsx
+│   │   └── CreatePost.jsx
+│   ├── pages/
+│   │   ├── Login.jsx
+│   │   ├── Signup.jsx
+│   │   └── Feed.jsx
+│   ├── contexts/
+│   │   └── AuthContext.jsx
+│   ├── App.jsx
+│   └── main.jsx
 ```
 
 ---
 
-## 🔗 API Endpoints
+## 🧪 API Endpoints
 
-### Auth Routes
+### Auth
 
 | Method | Endpoint           | Description       |
 | ------ | ------------------ | ----------------- |
 | POST   | `/api/auth/signup` | Register new user |
 | POST   | `/api/auth/login`  | Login user        |
 
-### Post Routes
+### Posts
 
-| Method | Endpoint     | Description     |
-| ------ | ------------ | --------------- |
-| POST   | `/api/posts` | Create new post |
-| GET    | `/api/posts` | Get all posts   |
-| PUT    | `/api/posts/:id/like` |  like on Post  |  
-| POST   | `/api/posts/:id/comment` |  Comment on Post  |  
----
-
-## ⚙️ Environment Variables
-
-### Backend (`.env`)
-
-```env
-PORT=
-MONGO_URI=
-JWT_SECRET=
-```
+| Method | Endpoint                 | Description     |
+| ------ | ------------------------ | --------------- |
+| POST   | `/api/posts`             | Create post     |
+| GET    | `/api/posts`             | Get all posts   |
+| POST   | `/api/posts/:id/like`    | Like post       |
+| POST   | `/api/posts/:id/comment` | Comment on post |
 
 ---
 
-## 🏃‍♂️ Run Locally
+## 🖼 Screenshots
 
-### 1️⃣ Clone the repository
+> 📌 Add screenshots in a `/screenshots` folder and update image paths below
 
-```bash
-git clone https://github.com/your-username/mini-social-post-application.git
-```
+### 🔐 Login Page
 
-### 2️⃣ Backend setup
+![Login](./screenshots/login.png)
+
+### 📝 Signup Page
+
+![Signup](./screenshots/signup.png)
+
+### 📰 Feed Page
+
+![Feed](./screenshots/feed.png)
+
+### ✍️ Create Post
+
+![Create Post](./screenshots/create-post.png)
+
+---
+
+## 🏆 Bonus Points Covered
+
+✅ Clean and modern UI
+✅ Fully responsive layout
+✅ Secure authentication flow
+✅ Optimized API structure
+✅ Proper error handling (UI + backend)
+✅ Industry-standard deployment
+✅ Well-structured, reusable code
+
+---
+
+## ⚙️ How to Run Locally
+
+### Backend
 
 ```bash
 cd backend
@@ -147,7 +199,7 @@ npm install
 npm run dev
 ```
 
-### 3️⃣ Frontend setup
+### Frontend
 
 ```bash
 cd frontend
@@ -155,42 +207,24 @@ npm install
 npm run dev
 ```
 
-Frontend runs on:
+---
 
-```
-http://localhost:5173
-```
+## 📄 Notes for Evaluators
 
-Backend runs on:
-
-```
-http://localhost:5000
-```
+* Project strictly follows the assignment constraints
+* Uses only **two MongoDB collections**
+* UI inspired by **TaskPlanet Social Page**
+* TailwindCSS not used (as instructed)
+* Fetch API used instead of Axios
+* Production-ready CORS handling implemented
 
 ---
 
-## 🚧 Future Improvements
-
-* Like & comment system
-* User profiles
-* Image uploads
-* Pagination
-* Dark mode
-* Refresh token authentication
-
----
-
-## 👨‍💻 Author
+## 🙌 Author
 
 **Sufal Thakre**
-
-* GitHub: [https://github.com/Sufalthakre18](https://github.com/Sufalthakre18)
-* LinkedIn: [https://www.linkedin.com/in/sufal-thakre/](https://www.linkedin.com/in/sufal-thakre/)
+Full Stack Developer (MERN)
 
 ---
 
-If you like this project:
-
-* ⭐ Star the repo
-* 🍴 Fork it
-* 🧠 Give feedback
+⭐ If you like this project, feel free to star the repository!
