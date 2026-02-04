@@ -8,7 +8,12 @@ import postRoutes from "./routes/post.routes.js";
 const app = express();
 dbConnect();
 
-app.use(cors({ origin: "*" }));
+app.use(cors({
+  origin: [
+    "http://localhost:5173",
+    "https://mini-social-post-application.vercel.app/"
+  ]
+}));
 app.use(express.json());
 
 app.get("/", (_, res) => {
