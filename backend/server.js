@@ -11,7 +11,7 @@ dbConnect();
 app.use(cors({
   origin: [
     "http://localhost:5173",
-    "https://mini-social-post-application.vercel.app/"
+    "https://mini-social-post-application.vercel.app"
   ]
 }));
 app.use(express.json());
